@@ -1,6 +1,7 @@
 from classes.face.theme import Theme
 import requests
-
+from mplfinance.plotting import plot
+import pandas as pd
 
 # Set the Binance API endpoint
 url = 'https://api.binance.com/api/v1/klines'
