@@ -1,6 +1,15 @@
-import requests
-import pandas as pd
-import mplfinance as mpf
+class Theme:
+    def __init__(self, facecolor, up_color, down_color):
+        self.facecolor = facecolor
+        self.up_color = up_color
+        self.down_color = down_color
+        
+    def get_style(self):
+        # Define the color scheme for up and down candles
+        market_colors = mpf.make_marketcolors(up=self.up_color, down=self.down_color)
+        # Define the style with the custom market colors and background color
+        mpf_style = mpf.make_mpf_style(marketcolors=market_colors, facecolor=self.facecolor)
+        return mpf_style
 
 # Set the Binance API endpoint
 url = 'https://api.binance.com/api/v1/klines'
@@ -26,13 +35,11 @@ df[['Open', 'High', 'Low', 'Close', 'Volume', 'Quote asset volume', 'Taker buy b
 # Set the index to be the datetime column
 df.set_index('Open time', inplace=True)
 
-# Define the color scheme for up and down candles
-up = '#26A69A'  # green
-down = '#EF5350'  # red
-market_colors = mpf.make_marketcolors(up=up, down=down)
+# Create a new instance of the Theme class with the desired colors
+my_theme = Theme(facecolor='#171B26', up_color='#26A69A', down_color='#EF5350')
 
-# Define the style with the custom market colors and a dark background
-mpf_style = mpf.make_mpf_style(marketcolors=market_colors, facecolor='#171B26')
+# Get the style object from the theme
+my_style = my_theme.get_style()
 
-# Plot the data using Matplotlib Finance
-mpf.plot(df, type='candle', title='BTCUSDT', ylabel='Price (USDT)', volume=True, style=mpf_style)
+# Plot the data using Matplotlib Finance and the custom style
+mpf.plot(df, type='candle', title='BTCUSDT', ylabel='Price (USDT)', volume=True, style=my_style)
