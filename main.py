@@ -1,6 +1,6 @@
 from classes.face.theme import Theme
 import requests
-from mplfinance.plotting import mpf
+import mplfinance as mpf
 import pandas as pd
 
 # Set the Binance API endpoint
