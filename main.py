@@ -2,6 +2,7 @@ from classes.face.theme import Theme
 import requests
 import mplfinance as mpf
 import pandas as pd
+from config import API_URL, SYMBOLS, TIME_FRAME, LIMIT
 
 # Set the Binance API endpoint
 url = 'https://api.binance.com/api/v1/klines'
